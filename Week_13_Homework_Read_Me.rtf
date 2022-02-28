@@ -1,0 +1,133 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Courier New;}{\f1\fmodern\fprq1 Lucida Console;}}
+{\colortbl ;\red255\green255\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\f0\fs22\lang1033 ## Automated ELK Stack Deployment\par
+\par
+The files in this repository were used to configure the network depicted below.\par
+\par
+![TODO: Update the path with the name of your diagram](Images/diagram_filename.png)\par
+\par
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the \highlight1 YML, and CONFIG FILE \highlight0 file may be used to install only certain pieces of it, such as Filebeat.\par
+\par
+  - _TODO: Enter the playbook file._\par
+\par
+This document contains the following details:\par
+- Description of the Topologu\par
+- Access Policies\par
+- ELK Configuration\par
+  - Beats in Use\par
+  - Machines Being Monitored\par
+- How to Use the Ansible Build\par
+\par
+\par
+### Description of the Topology\par
+\par
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.\par
+\par
+Load balancing ensures that the application will be highly \highlight1 AVAILABL and RELIABLE\highlight0 , in addition to restricting \highlight1 FAILURE\highlight0  to the network.\par
+- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box? \highlight1 Load Balancers act as a reverse proxy and distributes network or application traffic across a number of servers.\highlight0  \highlight1 The advantage of a jumpbox is to prevent all Azure VM's to expose to the public, and it also helps us to open only one port instead of several ports to connect different virtual machines present in the Azure cloud.\par
+\highlight0\par
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.\par
+- _TODO: What does Filebeat watch for?_\par
+- _TODO: What does Metricbeat record?_\par
+\par
+The configuration details of each machine may be found below.\par
+_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.\par
+\par
+| Name          | Function | IP Address | Operating System |\par
+|----------     |----------|------------|------------------|\par
+| Jump Box      | Gateway  | 10.1.0.4   | Linux            |\par
+| Elk-Server-NSG|Server    | 10.0.0.4   | Linux            |                  |\par
+| Web-1         |Server    | 10.1.0.5   | Linux            |\par
+| Web-2         |Server    | 10.1.0.6   | Linux            |\par
+\par
+### Access Policies\par
+\par
+The machines on the internal network are not exposed to the public Internet. \par
+\par
+Only the \highlight1 Jump-Box-Provisioner \highlight0 machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:\par
+- 5061 \highlight1 Kibana Port\highlight0 : Add whitelisted IP addresses \highlight1 20.124.182.47\highlight0\par
+\par
+Machines within the network can only be accessed by the Elk Server, and \highlight1 Jump-Box-Provisioner\highlight0 .\par
+- : Which machine did you allow to access your ELK VM? A= \highlight1 The Personal Laptop\highlight0  What was its IP address? A= \highlight1 73.76.11.65\highlight0 _\par
+\par
+A summary of the access policies in place can be found in the table below.\par
+\par
+| Name     | Publicly Accessible | Allowed IP Addresses |\par
+|----------|---------------------|----------------------|\par
+| Jump Box | \highlight1 Yes\highlight0  /No               | 10.0.0.1 10.0.0.2    |\par
+|          |                     |                      |\par
+|          |                     |                      |\par
+\par
+### Elk Configuration\par
+\par
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...\par
+- _TODO: What is the main advantage of automating configuration with Ansible?A= \highlight1 The advantages are its primary mechanisms for breaking a playbook into multiple files. Therefore simplifying writing complex playbooks, and making them easier to reuse.\highlight0  _\par
+\par
+The playbook implements the following tasks:\par
+- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._\par
+\highlight1 - Step 1 Install Dependencies\par
+- Step 2 Add Elastic Repository\par
+- Step 3 Install Elastic Search\par
+- Step 4 Install Kibana\par
+- Step 5 Install Logstash\par
+- Step 6 Install Filebeat\par
+\highlight0\par
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.\par
+\par
+![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)\par
+\par
+
+\pard\highlight1\f1\fs18 root@Jump-Box-Provisioner:/home/azureuser# docker start jolly_tu\par
+jolly_tu\par
+root@Jump-Box-Provisioner:/home/azureuser# docker attach jolly_tu\par
+
+\pard\highlight0\f0\fs22\par
+\par
+### Target Machines & Beats\par
+This ELK server is configured to monitor the following machines:\par
+- _TODO: List the IP addresses of the machines you are monitoring_\par
+\highlight1 A= Web-1 IP 10.1.0.5, and Web-2 10.1.0.6\highlight0\par
+\par
+We have installed the following Beats on these machines:\par
+- _TODO: Specify which Beats you successfully installed \highlight1 A= I installed both filebeats, and metricbeats\par
+\par
+\highlight0 These Beats allow us to collect the following information from each machine:\par
+- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._\par
+A1= \highlight1 Filebeat monitors the log files or locations that you specify, collects log events and forwards them into either Elasticsearch, or Logstash for indexing\highlight0 . \par
+A2= \highlight1 Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash. Metricbeat helps you monitor your servers by collecting metrics from the system and services running on the server, such as: Apache. HAProxy.\par
+\highlight0\par
+### Using the Playbook\par
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: \par
+\par
+SSH into the control node and follow the steps below:\par
+- Copy the \highlight1 elk_install.yml file  \highlight0 to \highlight1 etc/ansible/roles/elk_install.yml\highlight0 .\par
+- Update the hosts file to include the attribute elk.\par
+- Run the playbook, and navigate to \highlight1 http://[your_elk_server_ip]:5601/app/kibana \highlight0 to check that the installation worked as expected.\par
+\par
+_TODO: Answer the following questions to fill in the blanks:_\par
+- _Which file is the playbook? Where do you copy it? A= \highlight1 elk_install.yml file  \highlight0 to \highlight1 etc/ansible/roles/elk_install.yml\highlight0 _\par
+- _Which file do you update to make Ansible run the playbook on a specific machine? \highlight1 A= You need a playbook, and an Inventory file. \highlight0 How do I specify which machine to install the ELK server on versus which to install Filebeat on?\par
+A1= \par
+\highlight1 Step 1: Install Dependencies. Install Java. ...\par
+Step 2: Add Elastic Repository.\par
+Step 3: Install Elasticsearch. Configure Elasticsearch. ...\par
+Step 4: Install Kibana. Configure Kibana. ...\par
+Step 5: Install Logstash. ...\par
+Step 6: Install Filebeat\highlight0\par
+\par
+A2=_\par
+\highlight1 Step 1: Install Filebeatedit. Install Filebeat on all the servers you want to monitor. ...\par
+Step 2: Connect to the Elastic Stackedit. ...\par
+Step 3: Collect log dataedit. ...\par
+Step 4: Set up assetsedit. ...\par
+Step 5: Start Filebeatedit. ...\par
+Step 6: View your data in Kibanaedit\highlight0 .\par
+\par
+\par
+- _Which URL do you navigate to in order to check that the ELK server is running?\par
+\highlight1 http://20.124.182.47\par
+\highlight0\par
+_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._\par
+}
+ 
